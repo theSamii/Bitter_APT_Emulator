@@ -1,12 +1,19 @@
+***
 
-```markdown
 # 🛡️ Bitter APT - Bangladesh Campaign Emulation Range
+
+![Windows](https://img.shields.io/badge/Platform-Windows-blue?style=flat-square&logo=windows)
+![Node.js](https://img.shields.io/badge/Server-Node.js%20v23.4+-green?style=flat-square&logo=node.js)
+![Python](https://img.shields.io/badge/Agent-Python%203.10+-yellow?style=flat-square&logo=python)
+![MITRE ATT&CK](https://img.shields.io/badge/Framework-MITRE%20ATT%26CK-red?style=flat-square)
 
 > **⚠️ AUTHORIZED LAB USE ONLY:** This project executes real Tactics, Techniques, and Procedures (TTPs) including LSASS memory dumping, registry modification, and scheduled task creation. It must **only** be used in an isolated, dedicated lab environment with explicit authorization. Never run this in a production network or against unauthorized targets.
 
 A realistic, real-time emulation range of the **Bitter APT** (also known as T-APT-17, APT-C-08, or Hazy Tiger) kill chain targeting **Bangladesh** — specifically the **Rapid Action Battalion (RAB)** unit of the Bangladesh Police. 
 
 Based on threat intelligence from **Cisco Talos (May 2022)**, this range emulates the August 2021+ campaign utilizing the **ZxxZ Trojan**, Equation Editor exploits (CVE-2017-11882), and spoofed Pakistani government senders.
+
+---
 
 ## 📑 Table of Contents
 1. [Architecture](#️-architecture)
@@ -17,7 +24,7 @@ Based on threat intelligence from **Cisco Talos (May 2022)**, this range emulate
 4. [Tools Tutorial (Web UI)](#️-tools-tutorial-web-ui)
    - [Target Workstation Panel](#1-target-workstation-panel-right-side)
    - [Emulation Control Panel](#2-emulation-control-panel-left--center)
-   - [Wazuh Detection Center (SOC)](#3-wazuh-detection-center-bottom)
+   - [Wazuh Detection Center](#3-wazuh-detection-center-bottom)
 5. [Campaign Stages & TTPs](#-campaign-stages--ttps)
 6. [Indicators of Compromise (IOCs)](#️-indicators-of-compromise-iocs)
 7. [Troubleshooting](#️-troubleshooting)
@@ -28,26 +35,29 @@ Based on threat intelligence from **Cisco Talos (May 2022)**, this range emulate
 ## 🏗️ Architecture
 
 This project is **Docker-free** and runs natively on Windows. It consists of two main components:
-*   **Server (Node.js/Express):** Runs on a centralized Windows host. Provides the web UI, manages emulation stages, and ingests telemetry. It uses the built-in `node:sqlite` module so no C++ build tools are required.
+
+*   **Server (Node.js/Express):** Runs on a centralized Windows host. Provides the web UI, manages emulation stages, and ingests telemetry. It uses the built-in `node:sqlite` module, eliminating the need for C++ build tools.
 *   **Agent (Python):** Deployed to target Windows workstations. Polls the server for jobs, executes the real TTPs locally, and returns the output and telemetry.
 
 ---
 
 ## 📋 Prerequisites
 
-*   **Host Machine (Server):** Windows 10/11 or Windows Server.
-    *   **Node.js v23.4.0 or newer** (Required for the built-in `node:sqlite` module). 
-        *   Install via winget: `winget install --id OpenJS.NodeJS.LTS -e`
-*   **Target Machine (Agent):** Windows 10/11.
-    *   **Python 3.10+** (Required to run the agent).
-        *   Install via winget: `winget install --id Python.Python.3.12 -e`
-    *   *(Optional but recommended)* Sysmon and Wazuh Agent installed for full telemetry capture.
+**Host Machine (Server):** Windows 10/11 or Windows Server.
+*   **Node.js v23.4.0 or newer** (Required for the built-in `node:sqlite` module).
+    *   Install via winget: `winget install --id OpenJS.NodeJS.LTS -e`
+
+**Target Machine (Agent):** Windows 10/11.
+*   **Python 3.10+** (Required to run the agent).
+    *   Install via winget: `winget install --id Python.Python.3.12 -e`
+*   *(Optional but recommended)* Sysmon and Wazuh Agent installed for full telemetry capture.
 
 ---
 
 ## 🚀 Deployment Guide
 
 ### Step 1: Setup the Server
+
 1. Download or clone this repository to your host machine.
 2. Open an **Elevated PowerShell** (Run as Administrator) and navigate to the folder containing `bitterbitter.ps1`.
 3. Run the installer script:
@@ -65,6 +75,7 @@ This project is **Docker-free** and runs natively on Windows. It consists of two
    *   **Default Password:** `admin`
 
 ### Step 2: Deploy the Agent
+
 1. Copy the entire `agent` folder from the server machine to your target Windows workstation.
 2. On the target workstation, open an **Elevated Command Prompt** (Run as Administrator for full realism).
 3. Run the installer:
@@ -83,7 +94,7 @@ This project is **Docker-free** and runs natively on Windows. It consists of two
 
 ## 🖥️ Tools Tutorial (Web UI)
 
-The web interface is divided into three main sections designed for a complete Red vs. Blue team exercise. 
+The web interface is divided into three main sections designed for a complete Red vs. Blue team exercise.
 
 ### 1. Target Workstation Panel (Right Side)
 This is where you manage your victims and network discovery.
@@ -94,7 +105,7 @@ This is where you manage your victims and network discovery.
 
 ### 2. Emulation Control Panel (Left & Center)
 This is where you launch the attacks.
-*   **Campaign Stages (Left):** Click any of the 8 stages (01 to 08) to select it. 
+*   **Campaign Stages (Left):** Click any of the 8 stages (01 to 08) to select it.
 *   **RUN STAGE:** Sends a job to the agent to execute the real TTPs for that stage on the target machine.
 *   **STOP:** Attempts to halt the agent if a script is hanging.
 *   **CLEANUP:** Sends a cleanup command to the agent to remove files, scheduled tasks, and registry keys created by that stage (to reset the lab).
@@ -172,4 +183,3 @@ Simulates a SOC (Security Operations Center) dashboard to hunt for the emulated 
 
 ---
 *Built for the cybersecurity community. Stay safe, stay authorized.*
-```
