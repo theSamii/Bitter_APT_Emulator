@@ -62,7 +62,7 @@ This project is **Docker-free** and runs natively on Windows. It consists of two
 2. Open an **Elevated PowerShell** (Run as Administrator) and navigate to the folder containing `bitterbitter.ps1`.
 3. Run the installer script:
    ```powershell
-   .\bitterbitter.ps1
+   .\bitterAPT_Emulator.ps1
    ```
    *This script will create a `bitter-cyberrange` folder, install all Node.js dependencies, and generate all necessary files.*
 4. Navigate into the newly created folder and start the server:
