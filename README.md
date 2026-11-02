@@ -9,7 +9,7 @@
 
 > **⚠️ AUTHORIZED LAB USE ONLY:** This project executes real Tactics, Techniques, and Procedures (TTPs) including LSASS memory dumping, registry modification, and scheduled task creation. It must **only** be used in an isolated, dedicated lab environment with explicit authorization. Never run this in a production network or against unauthorized targets.
 
-A realistic, real-time emulation range of the **Bitter APT** (also known as T-APT-17, APT-C-08, or Hazy Tiger) kill chain targeting **Bangladesh** — specifically the **Rapid Action Battalion (RAB)** unit of the Bangladesh Police. 
+A realistic, real-time emulation range of the **Bitter APT** (also known as T-APT-17, APT-C-08, or Hazy Tiger) kill chain targeting **Bangladesh** , specifically the **Rapid Action Battalion (RAB)** unit of the Bangladesh Police. 
 
 Based on threat intelligence from **Cisco Talos (May 2022)**, this range emulates the August 2021+ campaign utilizing the **ZxxZ Trojan**, Equation Editor exploits (CVE-2017-11882), and spoofed Pakistani government senders.
 
